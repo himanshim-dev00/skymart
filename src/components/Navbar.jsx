@@ -1,4 +1,5 @@
 import { Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="flex items-center justify-between px-10 py-6">
@@ -14,12 +15,23 @@ function Navbar() {
   </div>
 
   <ul className="flex items-center gap-10 text-lg font-medium">
-    <li className="cursor-pointer hover:text-lime-400">Home</li>
-    <li className="cursor-pointer hover:text-lime-400">Products</li>
-    <li className="cursor-pointer hover:text-lime-400">Categories</li>
-    <li className="cursor-pointer hover:text-lime-400">Login</li>
-  </ul>
+  <li>
+    <Link to="/">Home</Link>
+  </li>
 
+  <li>Products</li>
+
+  <li>Categories</li>
+
+  <li>
+    <Link
+      to="/login"
+      className="cursor-pointer hover:text-lime-400"
+    >
+      Login
+    </Link>
+  </li>
+</ul>
 </nav>
   );
 }
