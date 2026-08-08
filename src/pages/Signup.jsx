@@ -1,38 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      alert("Please enter email and password");
+  const handleSignup = () => {
+    if (!name || !email || !password) {
+      alert("Please fill all fields");
       return;
     }
 
-    const savedUser =
-      JSON.parse(localStorage.getItem("user"));
+    const user = {
+      name,
+      email,
+      password,
+    };
 
-    if (!savedUser) {
-      alert("No account found. Please create an account first.");
-      return;
-    }
+    localStorage.setItem("user", JSON.stringify(user));
 
-    if (
-      email !== savedUser.email ||
-      password !== savedUser.password
-    ) {
-      alert("Invalid email or password");
-      return;
-    }
+    alert("Account created successfully!");
 
-    // Login successful
-    localStorage.setItem("isLoggedIn", "true");
-
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -42,52 +34,21 @@ function Login() {
       <div className="w-1/2 flex flex-col justify-center px-16">
 
         <p className="text-lime-400 text-sm font-semibold mb-4">
-          WELCOME BACK
+          JOIN SKYMART
         </p>
 
         <h1 className="text-6xl font-bold leading-tight">
-          Shop the future.
+          Shop smarter.
           <br />
           <span className="text-lime-400">
-            Today.
+            Live better.
           </span>
         </h1>
 
         <p className="text-gray-400 text-lg mt-6 max-w-lg">
-          Thousands of products, lightning-fast delivery,
-          and prices that make your wallet happy.
+          Create your account and discover amazing products,
+          great prices, and a seamless shopping experience.
         </p>
-
-        <div className="flex gap-4 mt-10">
-
-          <div className="border border-gray-600 rounded-xl px-8 py-5 text-center">
-            <h2 className="text-2xl font-bold text-lime-400">
-              20K+
-            </h2>
-            <p className="text-gray-500">
-              Products
-            </p>
-          </div>
-
-          <div className="border border-gray-600 rounded-xl px-8 py-5 text-center">
-            <h2 className="text-2xl font-bold text-lime-400">
-              50K+
-            </h2>
-            <p className="text-gray-500">
-              Users
-            </p>
-          </div>
-
-          <div className="border border-gray-600 rounded-xl px-8 py-5 text-center">
-            <h2 className="text-2xl font-bold text-lime-400">
-              4.9★
-            </h2>
-            <p className="text-gray-500">
-              Rating
-            </p>
-          </div>
-
-        </div>
 
       </div>
 
@@ -98,16 +59,34 @@ function Login() {
         <div className="w-[500px] border border-gray-800 rounded-3xl p-10">
 
           <h2 className="text-3xl font-bold">
-            Sign in
+            Create account
           </h2>
 
           <p className="text-gray-500 mt-2">
-            Enter your credentials to continue
+            Enter your details to get started
           </p>
 
 
-          {/* Email */}
+          {/* Name */}
           <div className="mt-8">
+
+            <label className="text-gray-400 text-sm">
+              Full name
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full mt-2 px-4 py-4 rounded-xl bg-gray-900 border border-gray-700 outline-none focus:border-lime-400"
+            />
+
+          </div>
+
+
+          {/* Email */}
+          <div className="mt-5">
 
             <label className="text-gray-400 text-sm">
               Email address
@@ -133,7 +112,7 @@ function Login() {
 
             <input
               type="password"
-              placeholder="Enter your password"
+              placeholder="Create a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full mt-2 px-4 py-4 rounded-xl bg-gray-900 border border-gray-700 outline-none focus:border-lime-400"
@@ -142,25 +121,24 @@ function Login() {
           </div>
 
 
-          {/* Login Button */}
+          {/* Signup */}
           <button
-            onClick={handleLogin}
+            onClick={handleSignup}
             className="w-full mt-7 bg-lime-400 text-black font-bold py-4 rounded-xl hover:bg-lime-300"
           >
-            Sign in →
+            Create account →
           </button>
 
 
-          {/* Signup */}
           <p className="text-center text-gray-500 mt-6">
 
-            Don't have an account?
+            Already have an account?
 
             <span
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/login")}
               className="text-lime-400 ml-1 cursor-pointer"
             >
-              Create one
+              Sign in
             </span>
 
           </p>
@@ -173,4 +151,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
