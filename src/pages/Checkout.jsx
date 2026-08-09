@@ -9,8 +9,7 @@ function Checkout() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const totalItems = cart.reduce(
     (total, item) => total + item.quantity,
@@ -18,8 +17,7 @@ function Checkout() {
   );
 
   const subtotal = cart.reduce(
-    (total, item) =>
-      total + item.price * item.quantity,
+    (total, item) => total + item.price * item.quantity,
     0
   );
 
@@ -35,43 +33,41 @@ function Checkout() {
     }
 
     localStorage.removeItem("cart");
-
     navigate("/order-success");
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white">
+    <div className="min-h-screen w-full overflow-x-hidden bg-black text-white">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-12 py-4">
+      <nav className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 sm:px-8 lg:px-12 py-4">
 
         <div
           onClick={() => navigate("/")}
           className="flex items-center gap-3 cursor-pointer"
         >
-          <div className="w-10 h-10 rounded-full bg-lime-400 flex items-center justify-center text-black text-2xl font-bold">
+          <div className="w-10 h-10 shrink-0 rounded-full bg-lime-400 flex items-center justify-center text-black text-2xl font-bold">
             ⚡
           </div>
 
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl font-bold whitespace-nowrap">
             Sky<span className="text-lime-400">Mart</span>
           </h1>
         </div>
 
         <button
           onClick={() => navigate("/cart")}
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white transition"
         >
           ← Back to Cart
         </button>
 
       </nav>
 
-
       {/* Main */}
-      <main className="max-w-5xl mx-auto px-6 py-10">
+      <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
 
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-3xl sm:text-4xl font-bold">
           Checkout
         </h1>
 
@@ -79,11 +75,11 @@ function Checkout() {
           Complete your order details.
         </p>
 
-
-        <div className="grid grid-cols-2 gap-6 mt-8">
+        {/* Responsive Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 w-full">
 
           {/* Delivery Details */}
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="min-w-0 w-full border border-gray-700 rounded-2xl p-4 sm:p-6">
 
             <h2 className="text-xl font-semibold mb-6">
               Delivery Details
@@ -91,7 +87,6 @@ function Checkout() {
 
             {/* Name */}
             <div className="mb-5">
-
               <label className="text-gray-400 text-sm">
                 Full Name
               </label>
@@ -101,15 +96,12 @@ function Checkout() {
                 placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full mt-2 bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
+                className="block w-full max-w-full min-w-0 mt-2 box-border bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
               />
-
             </div>
-
 
             {/* Email */}
             <div className="mb-5">
-
               <label className="text-gray-400 text-sm">
                 Email
               </label>
@@ -119,15 +111,12 @@ function Checkout() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full mt-2 bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
+                className="block w-full max-w-full min-w-0 mt-2 box-border bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
               />
-
             </div>
-
 
             {/* Phone */}
             <div className="mb-5">
-
               <label className="text-gray-400 text-sm">
                 Phone
               </label>
@@ -137,15 +126,12 @@ function Checkout() {
                 placeholder="Enter your phone number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full mt-2 bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
+                className="block w-full max-w-full min-w-0 mt-2 box-border bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
               />
-
             </div>
-
 
             {/* Address */}
             <div>
-
               <label className="text-gray-400 text-sm">
                 Address
               </label>
@@ -155,32 +141,29 @@ function Checkout() {
                 rows="4"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full mt-2 bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400"
+                className="block w-full max-w-full min-w-0 mt-2 box-border bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-lime-400 resize-none"
               ></textarea>
-
             </div>
 
           </div>
 
-
           {/* Payment */}
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="min-w-0 w-full border border-gray-700 rounded-2xl p-4 sm:p-6">
 
             <h2 className="text-xl font-semibold mb-6">
               Payment Method
             </h2>
 
+            {/* Cash on Delivery */}
+            <div className="w-full min-w-0 border border-lime-400 bg-lime-400/10 rounded-xl p-4">
 
-            {/* COD */}
-            <div className="border border-lime-400 bg-lime-400/10 rounded-xl p-4">
+              <div className="flex items-center gap-3 min-w-0">
 
-              <div className="flex items-center gap-3">
-
-                <div className="w-10 h-10 rounded-lg bg-lime-400 text-black flex items-center justify-center">
+                <div className="w-10 h-10 shrink-0 rounded-lg bg-lime-400 text-black flex items-center justify-center">
                   💳
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-semibold">
                     Cash on Delivery
                   </h3>
@@ -194,17 +177,16 @@ function Checkout() {
 
             </div>
 
-
             {/* Online Payment */}
-            <div className="border border-gray-700 rounded-xl p-4 mt-4">
+            <div className="w-full min-w-0 border border-gray-700 rounded-xl p-4 mt-4">
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0">
 
-                <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center">
+                <div className="w-10 h-10 shrink-0 rounded-lg bg-gray-800 flex items-center justify-center">
                   💳
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-semibold">
                     Online Payment
                   </h3>
@@ -218,39 +200,39 @@ function Checkout() {
 
             </div>
 
+            {/* Order Summary */}
+            <div className="border-t border-gray-700 mt-7 pt-6 w-full min-w-0">
 
-            {/* Summary */}
-            <div className="border-t border-gray-700 mt-7 pt-6">
-
-              <div className="flex justify-between text-gray-400">
+              <div className="flex items-center justify-between gap-4 text-gray-400">
                 <span>Items</span>
-                <span>{totalItems}</span>
+                <span className="shrink-0">
+                  {totalItems}
+                </span>
               </div>
 
-              <div className="flex justify-between text-gray-400 mt-3">
+              <div className="flex items-center justify-between gap-4 text-gray-400 mt-3">
                 <span>Subtotal</span>
 
-                <span>
+                <span className="shrink-0">
                   ${subtotal.toFixed(2)}
                 </span>
               </div>
 
-              <div className="flex justify-between text-gray-400 mt-3">
+              <div className="flex items-center justify-between gap-4 text-gray-400 mt-3">
                 <span>Delivery</span>
 
-                <span className="text-lime-400">
+                <span className="text-lime-400 shrink-0">
                   FREE
                 </span>
               </div>
 
-
-              <div className="flex justify-between mt-5 text-lg font-bold">
+              <div className="flex items-center justify-between gap-4 mt-5 text-lg font-bold">
 
                 <span>
                   Total
                 </span>
 
-                <span className="text-lime-400">
+                <span className="text-lime-400 shrink-0">
                   ${subtotal.toFixed(2)}
                 </span>
 
@@ -258,12 +240,11 @@ function Checkout() {
 
             </div>
 
-
             {/* Place Order */}
             <button
               onClick={handleOrder}
               disabled={cart.length === 0}
-              className="w-full mt-7 bg-lime-400 text-black font-bold py-4 rounded-xl hover:bg-lime-300 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full min-w-0 mt-7 bg-lime-400 text-black font-bold py-4 rounded-xl hover:bg-lime-300 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Place Order →
             </button>
