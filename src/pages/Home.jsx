@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const user = JSON.parse(localStorage.getItem("user"));
-  const userName = user?.name || "User";
+  const userName = user?.name || "Himanshi Mishra";
   const navigate = useNavigate();
 
   const handleLogout = () => {
